@@ -1,10 +1,19 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  type DehydratedState,
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { color, mixins } from "../styles/_theme";
 import GlobalStyles from "../styles/_GlobalStyles";
+import Layout from "../components/Layout";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  pageProps,
+}: AppProps<{ dehydratedState: DehydratedState }>) {
   const queryClient = new QueryClient();
 
   return (
@@ -12,7 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyles />
       <ThemeProvider theme={{ ...color, ...mixins }}>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <Hydrate state={pageProps.dehydratedState}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </Hydrate>
         </QueryClientProvider>
       </ThemeProvider>
     </>
