@@ -1,31 +1,54 @@
-import { request } from "../utils/axios-utils";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import Parser from "rss-parser";
+import { RSS_BLOG_LIST } from "../constants/BlogList";
 
-// 예시 쿼리 방법
-// const fetchSaleVehicleData = () => {
-//   return request({ url: "/carClasses" });
-// };
+interface DataType {
+  status: string;
+  value: valueDataType;
+}
+interface valueDataType {
+  items: AdditionalDataType[];
+  title: string;
+  description: string;
+  pubData: string;
+  managingEditor: string;
+  generator: string;
+  link: string;
+  language: string;
+  ttl: string;
+}
+interface AdditionalDataType {
+  isoDate: string;
+  "content:encoded"?: string;
+  "content:encodedSnippet"?: string;
+  author?: string;
+  categories?: string[];
+  blogTitle: string;
+  image: Image;
+  thumbnailImage: string;
+}
 
-// export const useGetSaleData = (onSuccess: any, onError: any) => {
-//   return useQuery(["saleVehicles"], fetchSaleVehicleData, {
-//     onSuccess,
-//     onError,
-//   });
-// };
+interface Image {
+  link: string;
+  url: string;
+  title: string;
+}
 
-// const fetchAllVehicles = ({ pageParam = 1 }) => {
-//   return request({ url: `/carClasses?_limit=5&_page=${pageParam}` });
-// };
+export const useGetFeeds = async () => {
+  let parser = new Parser();
+  const blog = RSS_BLOG_LIST.map(blog => blog.url);
 
-// export const useGetAllData = () => {
-//   return useInfiniteQuery(["allVehicles"], fetchAllVehicles, {
-//     getNextPageParam: (_lastPage, pages) => {
-//       if (pages.length < 4) {
-//         return pages.length + 1;
-//       } else {
-//         return undefined;
-//       }
-//     },
-//     enabled: false,
-//   });
-// };
+  const result = [];
+
+  const getFeeds = await Promise.allSettled(
+    blog.map(url => parser.parseURL(url))
+  );
+  result.push(
+    ...getFeeds.filter(data => data.status === "fulfilled").slice(0, 100)
+  );
+
+  // for await (const url of blog) {
+  //   parser.parseURL(url);
+  // }
+
+  return result;
+};

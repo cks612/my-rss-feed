@@ -9,7 +9,7 @@ const Gnb = () => {
       <GnbContent>
         <h1>Voyage Tech Blog Feed</h1>
         <Box>
-          <Link href="https://cks612.github.io/resume/">
+          <Link href="https://cks612.github.io/resume/" target="_blank">
             <MyImg>
               <Image
                 src="https://user-images.githubusercontent.com/66737450/174422458-b4392872-c9d4-4dd2-a9c3-1472a0a47a43.JPG"
