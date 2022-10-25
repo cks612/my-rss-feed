@@ -1,21 +1,14 @@
-import Parser from "rss-parser";
-import { RSS_BLOG_LIST } from "../constants/BlogList";
+import Parser, { Output } from "rss-parser";
+import { RSS_BLOG_LIST } from "../constants/blog/BlogList";
+import { isFulfilled } from "../types/utils";
+import { formatFeeds } from "../utils/rss/formatFeeds";
 
-interface DataType {
-  status: string;
-  value: valueDataType;
-}
-interface valueDataType {
-  items: AdditionalDataType[];
-  title: string;
-  description: string;
-  pubData: string;
-  managingEditor: string;
-  generator: string;
-  link: string;
-  language: string;
-  ttl: string;
-}
+export type FeedDataType = AdditionalDataType &
+  Output<{
+    [key: string]: any;
+  }>;
+export type Item = FeedDataType["items"][number];
+
 interface AdditionalDataType {
   isoDate: string;
   "content:encoded"?: string;
@@ -34,21 +27,20 @@ interface Image {
 }
 
 export const useGetFeeds = async () => {
-  let parser = new Parser();
-  const blog = RSS_BLOG_LIST.map(blog => blog.url);
+  // parser에 제네릭으로 추가적으로 들어갈 타입 정하기
+  let parser = new Parser<AdditionalDataType>({
+    headers: {
+      Accept: "application/rss+xml, application/xml, application/atom+xml",
+    },
+  });
 
+  const blog = RSS_BLOG_LIST.map(blog => blog.url);
   const result = [];
 
   const getFeeds = await Promise.allSettled(
     blog.map(url => parser.parseURL(url))
   );
-  result.push(
-    ...getFeeds.filter(data => data.status === "fulfilled").slice(0, 100)
-  );
+  result.push(...getFeeds.filter(isFulfilled).slice(0, 100));
 
-  // for await (const url of blog) {
-  //   parser.parseURL(url);
-  // }
-
-  return result;
+  return formatFeeds(result.map(feed => feed.value)).slice(0, 100);
 };
