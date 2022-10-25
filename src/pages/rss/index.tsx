@@ -2,7 +2,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { NextPage } from "next";
 import React from "react";
 import RssPage from "../../components/Rss";
-import { useGetFeeds } from "../../hooks/useFetchHooks";
+import { useGetFeeds } from "../../hooks/rss/useGetFeeds";
 
 const Rss: NextPage = () => {
   return <RssPage />;

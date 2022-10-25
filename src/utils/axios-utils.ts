@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosResponse } from "axios";
 
 const client = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "www.google.com",
 });
 
 export const request = async ({ ...options }) => {

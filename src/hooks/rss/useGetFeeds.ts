@@ -1,7 +1,7 @@
 import Parser, { Output } from "rss-parser";
-import { RSS_BLOG_LIST } from "../constants/blog/BlogList";
-import { isFulfilled } from "../types/utils";
-import { formatFeeds } from "../utils/rss/formatFeeds";
+import { RSS_BLOG_LIST } from "../../constants/blog/BlogList";
+import { isFulfilled } from "../../types/utils";
+import { formatFeeds } from "../../utils/rss/formatFeeds";
 
 export type FeedDataType = AdditionalDataType &
   Output<{
@@ -15,7 +15,7 @@ interface AdditionalDataType {
   "content:encodedSnippet"?: string;
   author?: string;
   categories?: string[];
-  blogTitle: string;
+  guid: string;
   image: Image;
   thumbnailImage: string;
 }

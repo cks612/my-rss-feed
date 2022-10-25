@@ -1,5 +1,5 @@
 import { FILTER_REGEX } from "../../constants/utils/FilterRegEx";
-import { FeedDataType, Item } from "../../hooks/useFetchHooks";
+import { FeedDataType, Item } from "../../hooks/rss/useGetFeeds";
 const { JSDOM } = require("jsdom");
 
 export const formatFeeds = (feeds: FeedDataType[]) => {
@@ -17,7 +17,6 @@ export const formatFeeds = (feeds: FeedDataType[]) => {
               "content:encodedSnippet": filterProcess(
                 data["content:encodedSnippet"] ?? ""
               ),
-              blogTitle: data.title,
               image: data.image ?? {
                 link: "",
                 url: "",
@@ -35,7 +34,7 @@ export const formatFeeds = (feeds: FeedDataType[]) => {
 };
 
 const filterProcess = (item: string) => {
-  return item.replaceAll(FILTER_REGEX, "").substring(0, 100);
+  return item.replaceAll(FILTER_REGEX, "").substring(0, 300);
 };
 
 const getThumbnailImage = (data: Item) => {

@@ -18,7 +18,11 @@ const moduleExports = {
     styledComponents: true,
   },
   images: {
-    domains: ["cdn-images-1.medium.com", "user-images.githubusercontent.com"],
+    domains: [
+      "cdn-images-1.medium.com",
+      "user-images.githubusercontent.com",
+      "blog.kakaocdn.net",
+    ],
   },
   // node: {
   //   fs: "empty",
