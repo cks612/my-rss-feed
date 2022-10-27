@@ -22,6 +22,9 @@ const moduleExports = {
       "cdn-images-1.medium.com",
       "user-images.githubusercontent.com",
       "blog.kakaocdn.net",
+      "d2.naver.com",
+      "camo.githubusercontent.com",
+      "substackcdn.com",
     ],
   },
   // node: {

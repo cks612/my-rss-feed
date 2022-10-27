@@ -16,19 +16,40 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
               ? feedData["content:encoded"]
               : feedData.content?.replace(/&nbsp;/gi, "")}
           </CardContent>
-          {feedData.thumbnailImage && (
+          {feedData.thumbnailImage ? (
             <Image
               src={feedData.thumbnailImage}
               alt="feedImage"
               width={300}
               height={200}
             />
+          ) : feedData.enclosure ? (
+            <Image
+              src={feedData.enclosure?.url}
+              alt="feedImage"
+              width={200}
+              height={100}
+            />
+          ) : (
+            ""
           )}
         </Container>
         <Author>
-          <FontAwesomeIcon icon={faUser} />
+          {feedData.image.url ? (
+            <Image
+              src={feedData.image.url}
+              alt="feedImage"
+              width={20}
+              height={20}
+            />
+          ) : (
+            <FontAwesomeIcon icon={faUser} />
+          )}
+
           {feedData.title}
-          {feedData.author && ` , ${feedData.author}`}
+          {(feedData.author && ` , ${feedData.author}`) ??
+            (feedData.creator && ` , ${feedData.creator}`) ??
+            ""}
         </Author>
       </CardWrapper>
     </a>
@@ -36,10 +57,6 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
 };
 
 export default FeedCard;
-
-const LinkToBlog = styled.a`
-  text-decoration: none;
-`;
 
 const CardWrapper = styled.div`
   display: flex;
@@ -85,6 +102,7 @@ const CardContent = styled.div`
 
 const Author = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
   font-size: 0.75em;
   font-weight: 900;

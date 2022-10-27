@@ -29,10 +29,14 @@ const Gnb = () => {
 export default Gnb;
 
 const GnbWrapper = styled.nav`
+  position: fixed;
   display: flex;
+  max-width: 700px;
   width: 100%;
   height: 50px;
-  margin-top: 20px;
+  padding-top: 20px;
+  backdrop-filter: blur(5px);
+  z-index: 100;
 `;
 
 const GnbContent = styled.div`
@@ -43,6 +47,7 @@ const GnbContent = styled.div`
   padding: 10px 10px;
 
   h1 {
+    font-size: 1.5em;
     font-weight: 900;
   }
 `;

@@ -17,7 +17,7 @@ export const formatFeeds = (feeds: FeedDataType[]) => {
               "content:encodedSnippet": filterProcess(
                 data["content:encodedSnippet"] ?? ""
               ),
-              image: data.image ?? {
+              image: feed.image ?? {
                 link: "",
                 url: "",
                 title: "",

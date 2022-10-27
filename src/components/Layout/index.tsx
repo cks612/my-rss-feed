@@ -20,6 +20,7 @@ const Layout = ({ children }: Props) => {
 export default Layout;
 
 export const MainContainer = styled.main`
+  position: relative;
   max-width: 700px;
   margin: 0 auto;
 `;
