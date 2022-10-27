@@ -2,6 +2,7 @@ import { request } from "../../utils/axios-utils";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchGoogleSuggests = ({ queryKey }: { queryKey: string[] }) => {
+  if (queryKey[0] === "") return false;
   return request({
     url: `/search?q=${encodeURIComponent(queryKey[0])}`,
   });
@@ -9,6 +10,6 @@ const fetchGoogleSuggests = ({ queryKey }: { queryKey: string[] }) => {
 
 export const useGetSuggests = (searchWord: string, debounceValue: boolean) => {
   return useQuery([searchWord], fetchGoogleSuggests, {
-    enabled: Boolean(debounceValue),
+    enabled: debounceValue,
   });
 };
