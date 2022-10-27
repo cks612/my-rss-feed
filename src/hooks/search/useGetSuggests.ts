@@ -1,5 +1,14 @@
-import React from "react";
+import { request } from "../../utils/axios-utils";
+import { useQuery } from "@tanstack/react-query";
 
-export const useGetSuggests = () => {};
+const fetchGoogleSuggests = ({ queryKey }: { queryKey: string[] }) => {
+  return request({
+    url: `/search?q=${encodeURIComponent(queryKey[0])}`,
+  });
+};
 
-export default useGetSuggests;
+export const useGetSuggests = (searchWord: string, debounceValue: boolean) => {
+  return useQuery([searchWord], fetchGoogleSuggests, {
+    enabled: Boolean(debounceValue),
+  });
+};

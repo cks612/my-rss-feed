@@ -4,10 +4,8 @@ import styled from "styled-components";
 import { Item } from "../../../hooks/rss/useGetFeeds";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 
 const FeedCard = ({ feedData }: { feedData: Item }) => {
-  console.log(feedData);
   return (
     <a href={feedData.link} target="_blank" rel="noreferrer">
       <CardWrapper>
