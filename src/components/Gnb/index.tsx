@@ -1,13 +1,32 @@
+import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import useInterval from "../../hooks/utils/useInterval";
 
 const Gnb = () => {
+  let timeClicker = moment().format("HH:mm:ss a");
+  const date = new Date().getHours();
+  const findMeridiem = date < 12 ? "am" : date < 17 ? "hm" : "pm";
+  const [_, setRealTime] = useState({});
+
+  useInterval(() => {
+    setRealTime(timeClicker);
+  }, 1000);
+
   return (
     <GnbWrapper>
       <GnbContent>
-        <h1>Voyage Tech Blog Feed</h1>
+        <GnbTitle>
+          {findMeridiem === "am"
+            ? "Good Morning"
+            : findMeridiem === "hm"
+            ? "Good Afternoon"
+            : "Good Evening, "}
+          <span>Voyage</span>
+        </GnbTitle>
+        <TimeTraker>{timeClicker}</TimeTraker>
         <Box>
           <Link href="https://cks612.github.io/resume/" target="_blank">
             <MyImg>
@@ -45,11 +64,6 @@ const GnbContent = styled.div`
   align-items: center;
   width: 100%;
   padding: 10px 10px;
-
-  h1 {
-    font-size: 1.5em;
-    font-weight: 900;
-  }
 `;
 
 const Box = styled.div`
@@ -91,4 +105,20 @@ const MyImg = styled.div`
     object-fit: cover;
     pointer-events: none;
   }
+`;
+
+const GnbTitle = styled.h1`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: neon;
+  color: #000;
+  font-size: 1.5em;
+`;
+
+const TimeTraker = styled.p`
+  color: #fff;
+  font-size: 1.5em;
+  text-shadow: 0 0 5px #171717, 0 0 20px #171717, 0 0 40px #5da7db,
+    0 0 55px #5da7db, 0 0 5px #5da7db;
 `;

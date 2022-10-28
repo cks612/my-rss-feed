@@ -30,7 +30,7 @@ const GoogleSearchSuggests = () => {
   return (
     <SearchContainer>
       <SearchBar>
-        <FontAwesomeIcon icon={faSearch} size="lg"></FontAwesomeIcon>
+        <FontAwesomeIcon icon={faSearch} size="lg" />
         <input placeholder="Google Search" onChange={handleInputValue} />
       </SearchBar>
       <SuggestsWrapper>
@@ -42,6 +42,7 @@ const GoogleSearchSuggests = () => {
                 <a
                   href={`https://www.google.com/search?q=${data}`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   {data}
                 </a>
@@ -59,14 +60,25 @@ const GoogleSearchSuggests = () => {
 export default GoogleSearchSuggests;
 
 const SuggestsWrapper = styled.div`
+  position: absolute;
   display: none;
   flex-direction: column;
   gap: 20px;
-  width: 100%;
-  padding: 20px 20px 0;
+  width: calc(100% + 2px);
+  padding: 20px 20px;
+  left: -1px;
+  top: 35px;
+  background: #fff;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 1000;
 `;
 
 const SearchContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -74,9 +86,11 @@ const SearchContainer = styled.div`
   padding: 10px 20px;
   border: 1px solid black;
   border-radius: 20px;
-  overflow: hidden;
 
   :focus-within {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
     ${SuggestsWrapper} {
       display: flex;
     }
