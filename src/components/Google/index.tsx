@@ -70,7 +70,15 @@ export default GoogleSearchSuggests;
 const SuggestsWrapper = styled.div`
   ${({ theme }) => theme.commonPadding()};
   ${({ theme }) =>
-    theme.borderDetail(undefined, undefined, "", undefined, "20px", "20px")};
+    theme.borderDetail(
+      `1px solid ${theme.PRIMARY_FONT}`,
+      `1px solid ${theme.PRIMARY_FONT}`,
+      "",
+      `1px solid ${theme.PRIMARY_FONT}`,
+      "20px",
+      "20px"
+    )};
+
   position: absolute;
   display: none;
   flex-direction: column;
@@ -85,7 +93,7 @@ const SuggestsWrapper = styled.div`
 const SearchContainer = styled.div`
   ${({ theme }) => theme.flexBox("column", "", "space-between")}
   ${({ theme }) => theme.commonPadding("10px 20px")};
-  ${({ theme }) => theme.border()};
+  ${({ theme }) => theme.border(`1px solid ${theme.PRIMARY_FONT}`)};
   position: relative;
   width: 100%;
   border-radius: 20px;
@@ -118,6 +126,7 @@ const SearchBar = styled.div`
   input {
     width: 100%;
     background: ${({ theme }) => theme.BACKGROUND};
+    color: ${({ theme }) => theme.PRIMARY_FONT};
     border: none;
     outline: none;
     transition: 0.5s;
