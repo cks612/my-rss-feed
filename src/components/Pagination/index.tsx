@@ -41,9 +41,7 @@ const Pagination = ({ totalLength, page, setPage }: paginateProps) => {
 export default Pagination;
 
 const PaginateWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox()};
   gap: 20px;
 `;
 
@@ -52,7 +50,7 @@ const Button: any = styled.button`
   margin: 0;
   border: none;
   background: transparent;
-  color: gray;
+  color: ${({ theme }) => theme.PAGINATE_NUM_TEXT};
   font-size: 1rem;
   transition: 0.5s;
 

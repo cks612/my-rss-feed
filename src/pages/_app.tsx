@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
-import { color, MainTheme, mixins, styles } from "../styles/_theme";
+import { MainTheme, mixins, styles } from "../styles/_theme";
 import GlobalStyles from "../styles/_GlobalStyles";
 import Layout from "../components/Layout";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -16,12 +16,12 @@ import { useDarkMode } from "../hooks/utils/useDarkMode";
 config.autoAddCss = false;
 
 export interface ContextProps {
-  theme: MainTheme;
+  colorTheme: MainTheme;
   toggleTheme: () => void;
 }
 
 export const ThemeContext = createContext<ContextProps>({
-  theme: styles.lightTheme,
+  colorTheme: styles.lightTheme,
   toggleTheme: () => {
     return null;
   },
@@ -32,11 +32,11 @@ function MyApp({
   pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
   const queryClient = new QueryClient();
-  const { theme, toggleTheme } = useDarkMode();
+  const { colorTheme, toggleTheme } = useDarkMode();
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <ThemeProvider theme={{ ...color, ...mixins, ...styles }}>
+    <ThemeContext.Provider value={{ colorTheme, toggleTheme }}>
+      <ThemeProvider theme={{ ...mixins, ...colorTheme }}>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             <GlobalStyles />

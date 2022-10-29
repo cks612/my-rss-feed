@@ -1,14 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-
+import React, { useContext, useState } from "react";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import useInterval from "../../hooks/utils/useInterval";
 import { styles } from "../../styles/_theme";
 import { ThemeContext } from "../../pages/_app";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Gnb = () => {
   let timeClicker = moment().format("HH:mm:ss a");
@@ -16,7 +15,7 @@ const Gnb = () => {
   const findMeridiem = date < 12 ? "am" : date < 17 ? "hm" : "pm";
   const [realTime, setRealTime] = useState({ timeClicker });
 
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { colorTheme, toggleTheme } = useContext(ThemeContext);
 
   useInterval(() => {
     setRealTime({ ...realTime });
@@ -25,7 +24,7 @@ const Gnb = () => {
   return (
     <GnbWrapper>
       <GnbContent>
-        <GnbTitle theme={theme}>
+        <GnbTitle>
           {findMeridiem === "am"
             ? "Good Morning"
             : findMeridiem === "hm"
@@ -35,7 +34,7 @@ const Gnb = () => {
         </GnbTitle>
         <TimeTraker>{timeClicker}</TimeTraker>
 
-        {theme === styles.lightTheme ? (
+        {colorTheme === styles.lightTheme ? (
           <FontAwesomeIcon
             className="icon"
             icon={faMoon}
@@ -81,15 +80,13 @@ const GnbWrapper = styled.nav`
   width: 100%;
   padding-top: 20px;
   backdrop-filter: blur(5px);
-  background: ${({ theme }) => theme.MAIN};
   z-index: 100;
 `;
 
 const GnbContent = styled.div`
-  ${({ theme }) => theme.flexBox};
-  justify-content: space-between;
+  ${({ theme }) => theme.flexBox("row", "center", "space-between")};
+  ${({ theme }) => theme.commonPadding("10px 10px")};
   width: 100%;
-  padding: 10px 10px;
 
   .icon {
     cursor: pointer;
@@ -103,10 +100,9 @@ const Box = styled.div`
   overflow: hidden;
 
   &::before {
+    ${({ theme }) => theme.widthHeightSize("100%", "100%")}
     content: "";
     position: absolute;
-    width: 100%;
-    height: 100%;
     background: linear-gradient(315deg, #00ccff, #d400d4);
     transition: 0.5s;
     animation: borderAnimate 4s linear infinite;
@@ -123,14 +119,11 @@ const Box = styled.div`
 `;
 
 const MyImg = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 6px solid;
-  border-radius: 50%;
+  ${({ theme }) => theme.flexBox("row", "center", "space-between")};
+  ${({ theme }) => theme.border("6px solid", "50%")};
   overflow: hidden;
-
   cursor: pointer;
+
   img {
     object-fit: cover;
     pointer-events: none;
@@ -138,11 +131,10 @@ const MyImg = styled.div`
 `;
 
 const GnbTitle = styled.h1`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox("row", "center", "")};
+  color: ${({ theme }) => theme.PRIMARY_FONT};
   gap: 20px;
   font-family: neon;
-  color: ${({ theme }) => theme.MAIN};
   font-size: 1.5em;
 `;
 

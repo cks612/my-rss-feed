@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 import { FeedDataType } from "../../hooks/rss/useGetFeeds";
@@ -10,10 +10,13 @@ import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
 import usePagination from "../../hooks/pagination/usePagination";
 import Pagination from "../Pagination";
 import uuid from "react-uuid";
+import { ThemeContext } from "../../pages/_app";
+import { styles } from "../../styles/_theme";
 
 const RssPage = () => {
   const cache = useQueryClient();
   const feedData = cache.getQueryData(["feeds"]) as FeedDataType[];
+  const { colorTheme } = useContext(ThemeContext);
   const { feeds, page, setPage } = usePagination({
     data: feedData,
   });
@@ -22,7 +25,11 @@ const RssPage = () => {
       <GoogleTitle>구글 검색</GoogleTitle>
       <GoogleSearchSuggests />
       <BlogTitle>
-        My Subscribe Blogs <FontAwesomeIcon icon={faSquareRss} color="black" />
+        My Subscribe Blogs{" "}
+        <FontAwesomeIcon
+          icon={faSquareRss}
+          color={colorTheme === styles.lightTheme ? "black" : "white"}
+        />
         <BlogList>
           <ul>
             {RSS_BLOG_LIST.map(data => (
@@ -46,10 +53,9 @@ const RssPage = () => {
 export default RssPage;
 
 const RssWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox("column", "", "")};
+  ${({ theme }) => theme.commonPadding("100px 10px")};
   gap: 30px;
-  padding: 100px 10px;
 
   a {
     all: unset;
@@ -57,45 +63,42 @@ const RssWrapper = styled.div`
 `;
 
 const GoogleTitle = styled.span`
-  font-size: 1.2em;
-  font-weight: 900;
+  ${({ theme }) => theme.commonFont(undefined, "900", undefined)};
+  color: ${({ theme }) => theme.PRIMARY_FONT};
 `;
 
 const BlogList = styled.div`
+  ${({ theme }) => theme.commonPadding()};
+  ${({ theme }) => theme.visibleAttrs()};
   position: absolute;
   left: 0;
   top: 2rem;
   width: 25em;
-  padding: 20px 20px;
   border-radius: 20px;
-  background: #000;
-  z-index: 1;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.5s;
+  background: ${({ theme }) => theme.BLOG_LIST};
 
   &::after {
-    border-top: 0px solid transparent;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #000;
+    ${({ theme }) =>
+      theme.borderDetail(
+        "10px solid transparent",
+        "10px solid transparent",
+        "0px solid transparent",
+        `10px solid ${theme.BLOG_LIST}`
+      )}
     content: "";
     position: absolute;
     top: -0.5rem;
     left: 20%;
-    /* transform: rotate(); */
   }
 
   ul {
-    display: flex;
-    flex-direction: column;
+    ${({ theme }) => theme.flexBox("column", "", "")};
+    ${({ theme }) => theme.commonFont("0.75em")};
     gap: 10px;
-    font-weight: 500;
-    font-size: 0.75em;
 
     li {
       width: 100%;
-      color: #fff;
+      color: ${({ theme }) => theme.BLOG_LIST_FONT};
       list-style: inside;
     }
   }
@@ -104,12 +107,12 @@ const BlogList = styled.div`
 const BlogTitle = styled(GoogleTitle)`
   position: relative;
   width: 36%;
+  left: 5px;
   font-weight: 500;
 
   :hover {
     ${BlogList} {
-      opacity: 1;
-      visibility: visible;
+      ${({ theme }) => theme.visibleAttrs("", "1", "visible", "")};
     }
   }
 `;

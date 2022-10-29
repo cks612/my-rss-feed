@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -6,9 +6,13 @@ import useDebounce from "../../hooks/utils/useDebounce";
 import { useGetSuggests } from "../../hooks/search/useGetSuggests";
 import { CompleteSuggestion } from "../../types/searchTypes";
 import uuid from "react-uuid";
+import { ThemeContext } from "../../pages/_app";
+import { styles } from "../../styles/_theme";
 
 const GoogleSearchSuggests = () => {
   const [searchWord, setSearchWord] = useState("");
+  const { colorTheme } = useContext(ThemeContext);
+
   let suggestionWords: CompleteSuggestion[] = [];
 
   const handleInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +34,11 @@ const GoogleSearchSuggests = () => {
   return (
     <SearchContainer>
       <SearchBar>
-        <FontAwesomeIcon icon={faSearch} size="lg" />
+        <FontAwesomeIcon
+          icon={faSearch}
+          size="lg"
+          color={colorTheme === styles.lightTheme ? "black" : "white"}
+        />
         <input placeholder="Google Search" onChange={handleInputValue} />
       </SearchBar>
       <SuggestsWrapper>
@@ -60,31 +68,26 @@ const GoogleSearchSuggests = () => {
 export default GoogleSearchSuggests;
 
 const SuggestsWrapper = styled.div`
+  ${({ theme }) => theme.commonPadding()};
+  ${({ theme }) =>
+    theme.borderDetail(undefined, undefined, "", undefined, "20px", "20px")};
   position: absolute;
   display: none;
   flex-direction: column;
   gap: 20px;
   width: calc(100% + 2px);
-  padding: 20px 20px;
   left: -1px;
   top: 35px;
-  background: #fff;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  background: ${({ theme }) => theme.BACKGROUND};
   z-index: 1000;
 `;
 
 const SearchContainer = styled.div`
+  ${({ theme }) => theme.flexBox("column", "", "space-between")}
+  ${({ theme }) => theme.commonPadding("10px 20px")};
+  ${({ theme }) => theme.border()};
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
   width: 100%;
-  padding: 10px 20px;
-  border: 1px solid black;
   border-radius: 20px;
 
   :focus-within {
@@ -98,8 +101,9 @@ const SearchContainer = styled.div`
 `;
 
 const SuggestsContainer = styled.div`
+  color: ${({ theme }) => theme.PRIMARY_FONT};
   width: 100%;
-  font-weight: 900;
+  font-weight: 500;
   cursor: pointer;
 
   :hover {
@@ -113,7 +117,9 @@ const SearchBar = styled.div`
 
   input {
     width: 100%;
+    background: ${({ theme }) => theme.BACKGROUND};
     border: none;
     outline: none;
+    transition: 0.5s;
   }
 `;

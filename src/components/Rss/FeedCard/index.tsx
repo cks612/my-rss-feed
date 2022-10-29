@@ -59,14 +59,11 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
 export default FeedCard;
 
 const CardWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 100%;
-  height: 10em;
-  padding: 20px 20px;
+  ${({ theme }) => theme.flexBox("column", "", "space-between")};
+  ${({ theme }) => theme.widthHeightSize("100%", "10em")};
+  ${({ theme }) => theme.commonPadding()};
+  background: ${({ theme }) => theme.FEED_BACKGROUND};
   border-radius: 15px;
-  background: #fffcf1;
   box-shadow: 5px 5px 10px #7d7d7d;
   transition: 0.5s ease-out;
   cursor: pointer;
@@ -77,6 +74,7 @@ const CardWrapper = styled.div`
 `;
 
 const Title = styled.h1`
+  color: ${({ theme }) => theme.FEED_TITLE};
   font-weight: 900;
 `;
 
@@ -87,11 +85,10 @@ const Container = styled.div`
 `;
 
 const CardContent = styled.div`
-  font-size: 1em;
-  font-size: 14px;
-  line-height: 22px;
-  color: #2b2d36;
   display: -webkit-box;
+  line-height: 22px;
+  color: ${({ theme }) => theme.FEED_CONTENT};
+  font-size: 14px;
   overflow: hidden;
   vertical-align: top;
   text-overflow: ellipsis;
@@ -101,10 +98,8 @@ const CardContent = styled.div`
 `;
 
 const Author = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox(undefined, undefined, "")};
+  ${({ theme }) => theme.commonFont("0.75em", "900", undefined)};
+  color: ${({ theme }) => theme.FEED_FOOTER};
   gap: 10px;
-  font-size: 0.75em;
-  font-weight: 900;
-  color: #595f67;
 `;

@@ -18,7 +18,7 @@ export default Footer;
 const FooterContainer = styled.footer`
   padding: 32px 24px;
   text-align: center;
-  color: #a0aec0;
+  color: ${({ theme }) => theme.FEED_FOOTER};
   font-size: 14px;
 
   a {
