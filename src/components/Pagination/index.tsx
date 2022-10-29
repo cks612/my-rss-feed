@@ -18,7 +18,7 @@ const Pagination = ({ totalLength, page, setPage }: paginateProps) => {
         &lt;
       </Button>
       {Array(numberOfPagesFromData)
-        .fill()
+        .fill(0)
         .map((_, i) => (
           <Button
             key={uuid()}
@@ -47,7 +47,7 @@ const PaginateWrapper = styled.div`
   gap: 20px;
 `;
 
-const Button = styled.button`
+const Button: any = styled.button`
   padding: 8px;
   margin: 0;
   border: none;

@@ -1,12 +1,10 @@
 export const color = {
-  mainBodyColor: "#f3f4f6",
-  whiteColor: "#FFF",
-  mainColor: "#0EB8FF",
-  mainFontColor: "#52a8ec",
-  carouselBackColor: "#bbe3fc",
-  titleColor: "#28323c",
-  rightTagColor: "#f2fafd",
-  grayColor: "#6c757d",
+  FONT_BLACK: "#000",
+  FONT_WHITE: "#FFF",
+  FEED_BODY: "#fffcf1",
+  FEED_CONTENT: "#2b2d36",
+  FEED_FOOTER: "#595f67",
+  PAGINATE_TEXT: "#52a8ec",
 };
 
 export const mixins = {
@@ -42,3 +40,23 @@ export const mixins = {
     return;
   },
 };
+
+export const styles = {
+  lightTheme: {
+    ...color,
+    MAIN: "#6868AD",
+    SUB: "#dbd7ff",
+    BACKGROUND: "#fdfdff",
+    SUBBACKGROUND: "rgb(242, 240, 253)",
+  },
+
+  darkTheme: {
+    ...color,
+    MAIN: "#dbd7ff",
+    SUB: "#6868AD",
+    BACKGROUND: "#202124",
+    SUBBACKGROUND: "#30373e",
+  },
+};
+
+export type MainTheme = typeof styles.lightTheme;

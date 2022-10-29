@@ -1,24 +1,31 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import useInterval from "../../hooks/utils/useInterval";
+import { styles } from "../../styles/_theme";
+import { ThemeContext } from "../../pages/_app";
 
 const Gnb = () => {
   let timeClicker = moment().format("HH:mm:ss a");
   const date = new Date().getHours();
   const findMeridiem = date < 12 ? "am" : date < 17 ? "hm" : "pm";
-  const [_, setRealTime] = useState({});
+  const [realTime, setRealTime] = useState({ timeClicker });
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   useInterval(() => {
-    setRealTime(timeClicker);
+    setRealTime({ ...realTime });
   }, 1000);
 
   return (
     <GnbWrapper>
       <GnbContent>
-        <GnbTitle>
+        <GnbTitle theme={theme}>
           {findMeridiem === "am"
             ? "Good Morning"
             : findMeridiem === "hm"
@@ -27,6 +34,27 @@ const Gnb = () => {
           <span>Voyage</span>
         </GnbTitle>
         <TimeTraker>{timeClicker}</TimeTraker>
+
+        {theme === styles.lightTheme ? (
+          <FontAwesomeIcon
+            className="icon"
+            icon={faMoon}
+            spin
+            size="xl"
+            color="black"
+            onClick={toggleTheme}
+          />
+        ) : (
+          <FontAwesomeIcon
+            className="icon"
+            icon={faSun}
+            spin
+            size="xl"
+            color="black"
+            onClick={toggleTheme}
+          />
+        )}
+
         <Box>
           <Link href="https://cks612.github.io/resume/" target="_blank">
             <MyImg>
@@ -35,7 +63,6 @@ const Gnb = () => {
                 alt="myImg"
                 width={30}
                 height={30}
-                unoptimized={true}
               />
             </MyImg>
           </Link>
@@ -52,18 +79,21 @@ const GnbWrapper = styled.nav`
   display: flex;
   max-width: 700px;
   width: 100%;
-  height: 50px;
   padding-top: 20px;
   backdrop-filter: blur(5px);
+  background: ${({ theme }) => theme.MAIN};
   z-index: 100;
 `;
 
 const GnbContent = styled.div`
-  display: flex;
+  ${({ theme }) => theme.flexBox};
   justify-content: space-between;
-  align-items: center;
   width: 100%;
   padding: 10px 10px;
+
+  .icon {
+    cursor: pointer;
+  }
 `;
 
 const Box = styled.div`
@@ -96,7 +126,7 @@ const MyImg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 6px solid #070a1c;
+  border: 6px solid;
   border-radius: 50%;
   overflow: hidden;
 
@@ -112,7 +142,7 @@ const GnbTitle = styled.h1`
   align-items: center;
   gap: 20px;
   font-family: neon;
-  color: #000;
+  color: ${({ theme }) => theme.MAIN};
   font-size: 1.5em;
 `;
 

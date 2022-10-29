@@ -10,6 +10,7 @@ import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
 import usePagination from "../../hooks/pagination/usePagination";
 import Pagination from "../Pagination";
 import uuid from "react-uuid";
+
 const RssPage = () => {
   const cache = useQueryClient();
   const feedData = cache.getQueryData(["feeds"]) as FeedDataType[];
