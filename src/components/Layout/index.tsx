@@ -1,7 +1,6 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import styled from "styled-components";
-import Footer from "../Footer";
 
 interface Props {
   children: React.ReactNode;

@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 import { FeedDataType } from "../../hooks/rss/useGetFeeds";
 import FeedCard from "./FeedCard";
-import GoogleSearchSuggests from "../Google";
+// import GoogleSearchSuggests from "../";
 import { RSS_BLOG_LIST } from "../../constants/blog/BlogList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareRss } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ import Pagination from "../Pagination";
 import uuid from "react-uuid";
 import { ThemeContext } from "../../pages/_app";
 import { styles } from "../../styles/_theme";
+import GoogleSearchSuggests from "../Google";
 
 const RssPage = () => {
   const cache = useQueryClient();

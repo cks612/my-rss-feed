@@ -45,6 +45,7 @@ class MyDocument extends Document {
               __html: `
             const theme = localStorage.getItem("theme");
             document.documentElement.setAttribute("data-theme", theme);
+
           `,
             }}
           />
