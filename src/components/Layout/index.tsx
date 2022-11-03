@@ -1,3 +1,5 @@
+import Footer from "@components/Footer";
+import Gnb from "@components/Gnb";
 import dynamic from "next/dynamic";
 import React from "react";
 import styled from "styled-components";
@@ -5,10 +7,6 @@ import styled from "styled-components";
 interface Props {
   children: React.ReactNode;
 }
-
-const Gnb = dynamic(() => import("../Gnb"), {
-  ssr: false,
-});
 
 const Layout = ({ children }: Props) => {
   return (
@@ -25,5 +23,6 @@ export default Layout;
 export const MainContainer = styled.main`
   position: relative;
   max-width: 700px;
+  padding-top: 10px;
   margin: 0 auto;
 `;

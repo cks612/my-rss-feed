@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { MainTheme, styles } from "../../styles/_theme";
+import { MainTheme, styles } from "@styles/_theme";
 
 export const useDarkMode = () => {
-  const [colorTheme, setTheme] = useState<MainTheme>(styles.lightTheme);
+  const [colorTheme, setTheme] = useState<MainTheme | null>(null);
 
   const setMode = (mode: MainTheme) => {
     if (mode === styles.lightTheme) {

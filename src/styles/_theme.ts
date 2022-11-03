@@ -44,10 +44,10 @@ export const mixins = {
   width:${width};
   height:${height};
 `,
-  commonFont: (size = "1.2em", weight = "500", font = "Noto Sans KR") => `
+  commonFont: (size = "1.2em", weight = "500") => `
   font-size:${size};
   font-weight: ${weight};
-  font-family: ${font};
+
 `,
 
   commonPadding: (padding = "20px 20px") => `

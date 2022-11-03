@@ -1,5 +1,5 @@
-import { request } from "../../utils/axios-utils";
 import { useQuery } from "@tanstack/react-query";
+import { request } from "utils/axios-utils";
 
 const fetchGoogleSuggests = ({ queryKey }: { queryKey: string[] }) => {
   if (queryKey[0] === "") return false;

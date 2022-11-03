@@ -6,17 +6,19 @@ import {
 } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
-import { MainTheme, mixins, styles } from "../styles/_theme";
-import GlobalStyles from "../styles/_GlobalStyles";
-import Layout from "../components/Layout";
+import { createContext } from "react";
+import Layout from "@components/Layout";
+import { useDarkMode } from "hooks/utils/useDarkMode";
+import { MainTheme, mixins, styles } from "@styles/_theme";
+import GlobalStyles from "@styles/_GlobalStyles";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { createContext } from "react";
-import { useDarkMode } from "../hooks/utils/useDarkMode";
+import Head from "next/head";
+
 config.autoAddCss = false;
 
 export interface ContextProps {
-  colorTheme: MainTheme;
+  colorTheme: MainTheme | null;
   toggleTheme: () => void;
 }
 
@@ -27,26 +29,34 @@ export const ThemeContext = createContext<ContextProps>({
   },
 });
 
+const queryClient = new QueryClient();
+
 function MyApp({
   Component,
   pageProps,
 }: AppProps<{ dehydratedState: DehydratedState }>) {
-  const queryClient = new QueryClient();
   const { colorTheme, toggleTheme } = useDarkMode();
 
   return (
-    <ThemeContext.Provider value={{ colorTheme, toggleTheme }}>
-      <ThemeProvider theme={{ ...mixins, ...colorTheme }}>
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <GlobalStyles />
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </Hydrate>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Rss Feed</title>
+      </Head>
+
+      <ThemeContext.Provider value={{ colorTheme, toggleTheme }}>
+        <ThemeProvider theme={{ ...mixins, ...colorTheme }}>
+          <QueryClientProvider client={queryClient}>
+            <Hydrate state={pageProps.dehydratedState}>
+              <GlobalStyles />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </Hydrate>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </ThemeContext.Provider>
+    </>
   );
 }
 

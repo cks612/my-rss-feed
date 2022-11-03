@@ -21,6 +21,7 @@ class MyDocument extends Document {
         originalRenderPage({
           enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
+
       const initialProps = await Document.getInitialProps(ctx);
       return {
         ...initialProps,
@@ -39,18 +40,26 @@ class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html>
-        <Head>
+        <Head />
+        <body>
           <script
             dangerouslySetInnerHTML={{
               __html: `
             const theme = localStorage.getItem("theme");
-            document.documentElement.setAttribute("data-theme", theme);
+            const getUserTheme = () => {
+             if(theme){
+              return theme
+             } 
+             return window.matchMedia('(prefers-color-scheme: dark)').matches
+             ? 'dark'
+             : 'light'
+          }
+          document.body.dataset.theme = getUserTheme();
 
           `,
             }}
           />
-        </Head>
-        <body>
+
           <Main />
           <NextScript />
         </body>

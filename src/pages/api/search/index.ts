@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import convert from "xml-js";
-import type { SearchSuggestions } from "../../../types/searchTypes";
+import type { SearchSuggestions } from "types/rss/searchTypes";
 
 const client = axios.create({
   baseURL: "https://www.google.com",
@@ -21,7 +21,6 @@ const getSearchSuggestions = async (
       spaces: 2,
     })
   );
-  console.log(xmlToJson);
 
   return res.status(200).json(xmlToJson);
 };

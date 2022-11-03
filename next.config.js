@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
-const path = require("path");
+const { withSentryConfig } = require("@sentry/nextjs");
+
+// const withBundleAnalyzer = require("@next/bundle-analyzer")({
+//   enabled: process.env.ANALYZE === "true",
+// });
 
 // Next.js가 버전이 올라가면서 큰 변화로는 babel에서 SWC가 나온 것
 // babel에서 사용하는 모든 부분이 대체가 될 수 있도록 변경되었다
@@ -8,7 +12,8 @@ const moduleExports = {
   // 코드를 축소하고 압축하는 부분 - 가장 속도가 빠르다고 알려진 Terser보다 7배 빠르다
   swcMinify: true,
   reactStrictMode: true,
-  staticPageGenerationTimeout: 2 * 60,
+
+  // staticPageGenerationTimeout: 10,
   async redirects() {
     return [
       {
@@ -23,6 +28,7 @@ const moduleExports = {
     // 이 부분을 무척 간단하게 킬 수 있다.
     styledComponents: true,
   },
+
   // webpack: config => {
   //   config.resolve.modules.push(path.resolve("."));
 
@@ -56,14 +62,6 @@ const moduleExports = {
     ],
   },
 
-  // sentry: {
-  //   hideSourceMaps: true,
-
-  //   // This option will automatically provide performance monitoring for Next.js
-  //   // data-fetching methods and API routes, making the manual wrapping of API
-  //   // routes via `withSentry` redundant.
-  //   autoInstrumentServerFunctions: true,
-  // },
   // webpack(config) {
   //   const prod = process.env.NODE_ENV === "production";
   //   const plugins = [...config.plugins];
@@ -76,20 +74,29 @@ const moduleExports = {
   // },
   // };
 
-  // const sentryWebpackPluginOptions = {
-  //   // Additional config options for the Sentry Webpack plugin. Keep in mind that
-  //   // the following options are set automatically, and overriding them is not
-  //   // recommended:
-  //   //   release, url, org, project, authToken, configFile, stripPrefix,
-  //   //   urlPrefix, include, ignore
+  // Your existing module.exports
 
-  //   silent: true, // Suppresses all logs
-  //   // For all available options, see:
-  //   // https://github.com/getsentry/sentry-webpack-plugin#options.
-  // };
-
-  // // module.exports = withBundleAnalyzer(
-  // //   withSentryConfig(moduleExports, sentryWebpackPluginOptions)
-  // );
+  sentry: {
+    // Use `hidden-source-map` rather than `source-map` as the Webpack `devtool`
+    // for client-side builds. (This will be the default starting in
+    // `@sentry/nextjs` version 8.0.0.) See
+    // https://webpack.js.org/configuration/devtool/ and
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
+    // for more information.
+    hideSourceMaps: true,
+  },
 };
-module.exports = moduleExports;
+
+const sentryWebpackPluginOptions = {
+  // Additional config options for the Sentry Webpack plugin. Keep in mind that
+  // the following options are set automatically, and overriding them is not
+  // recommended:
+  //   release, url, org, project, authToken, configFile, stripPrefix,
+  //   urlPrefix, include, ignore
+
+  silent: true, // Suppresses all logs
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options.
+};
+
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);

@@ -6,8 +6,6 @@ const client = axios.create({
 
 export const request = async ({ ...options }) => {
   client.defaults.headers.common.Authorization = "Bearer token";
-  client.defaults.withCredentials = true;
-
   const onSuccess = (response: any) => response;
   const onError = (error: Error) => {
     return error;
