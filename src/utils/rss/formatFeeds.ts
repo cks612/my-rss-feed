@@ -1,5 +1,5 @@
 import { FILTER_REGEX } from "constants/utils/FilterRegEx";
-import { FeedDataType, Item } from "hooks/rss/useGetFeeds";
+import { FeedDataType, Item } from "types/rss/rssTypes";
 
 const { JSDOM } = require("jsdom");
 
