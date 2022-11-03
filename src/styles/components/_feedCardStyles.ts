@@ -52,3 +52,8 @@ export const Author = styled.div`
   color: ${({ theme }) => theme.FEED_FOOTER};
   gap: 10px;
 `;
+
+export const ImgContent = styled.div`
+  border-radius: 50px;
+  overflow: hidden;
+`;

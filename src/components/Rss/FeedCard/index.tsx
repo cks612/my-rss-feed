@@ -38,28 +38,27 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
                 ""}
             </S.Author>
           </S.FeedHeader>
-
-          {(feedData.thumbnailImage && (
-            <Image
-              src={feedData.thumbnailImage}
-              alt="feedImage"
-              width={200}
-              height={100}
-              objectFit="cover"
-              layout="fixed"
-            />
-          )) ??
-            (feedData.enclosure && (
+          <S.ImgContent>
+            {(feedData.thumbnailImage && (
               <Image
-                src={feedData.enclosure?.url}
+                src={feedData.thumbnailImage}
                 alt="feedImage"
-                width={100}
-                height={100}
-                objectFit="cover"
-                layout="fixed"
+                width={500}
+                height={500}
+                objectFit="contain"
               />
             )) ??
-            ""}
+              (feedData.enclosure && (
+                <Image
+                  src={feedData.enclosure?.url}
+                  alt="feedImage"
+                  width={500}
+                  height={500}
+                  objectFit="contain"
+                />
+              )) ??
+              ""}
+          </S.ImgContent>
         </S.Container>
       </S.CardWrapper>
     </a>

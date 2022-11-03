@@ -35,7 +35,7 @@ export const formatFeeds = (feeds: FeedDataType[]) => {
 };
 
 const filterProcess = (item: string) => {
-  return item.replaceAll(FILTER_REGEX, "").substring(0, 100);
+  return item.replaceAll(FILTER_REGEX, "").substring(0, 300);
 };
 
 const getThumbnailImage = (data: Item) => {

@@ -14,7 +14,7 @@ export const useGetFeeds = async () => {
     },
   });
 
-  const blog = RSS_BLOG_LIST.slice(0, 3).map(blog => blog.url);
+  const blog = RSS_BLOG_LIST.map(blog => blog.url);
   const result = [];
 
   const getFeeds = await Promise.allSettled(
