@@ -37,11 +37,12 @@ export const ContentContainer = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 30px;
+  overflow: hidden;
 `;
 
 export const Content = styled.div`
+  ${({ theme }) => theme.widthHeightSize("100%", "40px")};
   display: -webkit-box;
-  width: 100%;
   line-height: 22px;
   color: ${({ theme }) => theme.FEED_CONTENT};
   font-size: 14px;
@@ -54,6 +55,10 @@ export const Content = styled.div`
 `;
 
 export const ImgContent = styled.div`
+  display: flex;
+  flex: 0 0 10%;
+  width: 100px;
+
   border-radius: 50px;
   overflow: hidden;
 `;
