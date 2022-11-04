@@ -28,12 +28,12 @@ const GlobalStyles = createGlobalStyle`
     background: ${styles.darkTheme.BACKGROUND};
    }
  
-   /* @font-face {
+   @font-face {
   font-family: neon;
   font-display: swap;
   src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf) format("truetype") ;
   
-} */
+}
 
 
 `;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
-  ${({ theme }) => theme.flexBox("column", "", undefined)};
+  ${({ theme }) => theme.flexBox("column", "", "space-between")};
   ${({ theme }) => theme.widthHeightSize("100%", "10em")};
   ${({ theme }) => theme.commonPadding()};
   background: ${({ theme }) => theme.FEED_BACKGROUND};
@@ -15,10 +15,17 @@ export const CardWrapper = styled.div`
   }
 `;
 
+export const CardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+`;
+
 export const Title = styled.h1`
   color: ${({ theme }) => theme.FEED_TITLE};
   font-weight: 900;
 `;
+export const PubDate = styled(Title)``;
 
 export const Container = styled.div`
   display: flex;
@@ -26,8 +33,15 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const CardContent = styled.div`
+export const ContentContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+`;
+
+export const Content = styled.div`
   display: -webkit-box;
+  width: 100%;
   line-height: 22px;
   color: ${({ theme }) => theme.FEED_CONTENT};
   font-size: 14px;
@@ -36,14 +50,14 @@ export const CardContent = styled.div`
   text-overflow: ellipsis;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
 `;
 
-export const FeedHeader = styled.div`
+export const ImgContent = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 15px;
+  flex: 0 0 10%;
+  border-radius: 50px;
+  overflow: hidden;
 `;
 
 export const Author = styled.div`
@@ -51,9 +65,4 @@ export const Author = styled.div`
   ${({ theme }) => theme.commonFont("0.75em", "900")};
   color: ${({ theme }) => theme.FEED_FOOTER};
   gap: 10px;
-`;
-
-export const ImgContent = styled.div`
-  border-radius: 50px;
-  overflow: hidden;
 `;

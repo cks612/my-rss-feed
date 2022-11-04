@@ -23,11 +23,11 @@ const Gnb = () => {
       <S.GnbContent>
         <S.GnbTitle>
           {findMeridiem === "am"
-            ? "Good Morning"
+            ? "Good Morning, "
             : findMeridiem === "hm"
-            ? "Good Afternoon"
+            ? "Good Afternoon, "
             : "Good Evening, "}
-          <span>Voyage</span>
+          Voyage
         </S.GnbTitle>
         <TimeClicker />
 

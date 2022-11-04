@@ -55,7 +55,7 @@ export const GnbTitle = styled.h1`
   ${({ theme }) => theme.flexBox("row", "center", "")};
   color: ${({ theme }) => theme.PRIMARY_FONT};
   gap: 20px;
-  font-family: "Neon";
+  font-family: neon;
   font-size: 1.3em;
 `;
 
