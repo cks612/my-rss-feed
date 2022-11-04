@@ -23,30 +23,29 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
               ? feedData["content:encoded"]
               : feedData.content?.replace(/&nbsp;/gi, "")}
           </S.Content>
-
-          {(feedData.thumbnailImage && (
-            <S.ImgContent>
-              <Image
-                src={feedData.thumbnailImage}
-                alt="feedImage"
-                width={100}
-                height={100}
-                objectFit="contain"
-              />
-            </S.ImgContent>
-          )) ??
-            (feedData.enclosure && (
-              <Image
-                src={feedData.enclosure?.url}
-                alt="feedImage"
-                width={500}
-                height={500}
-                objectFit="contain"
-              />
-            )) ??
-            ""}
         </S.ContentContainer>
-
+        {(feedData.thumbnailImage && (
+          <S.ImgContent>
+            <Image
+              src={feedData.thumbnailImage}
+              alt="feedImage"
+              width={100}
+              height={100}
+              layout="fixed"
+              objectFit="contain"
+            />
+          </S.ImgContent>
+        )) ??
+          (feedData.enclosure && (
+            <Image
+              src={feedData.enclosure?.url}
+              alt="feedImage"
+              width={500}
+              height={500}
+              objectFit="contain"
+            />
+          )) ??
+          ""}
         <S.Author>
           {feedData.image.url ? (
             <Image

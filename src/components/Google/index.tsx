@@ -25,7 +25,15 @@ const GoogleSearchSuggests = () => {
     }
   };
 
-  const debounceValue = useDebounce(searchWord, 1000);
+  const handleSubmitGoogleInput = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    window.open(
+      `https://www.google.com/search?q=${encodeURIComponent(searchWord)}`,
+      "_blank"
+    );
+  };
+
+  const debounceValue = useDebounce(searchWord, 500);
 
   const { data } = useGetSuggests(searchWord, Boolean(debounceValue));
 
@@ -35,7 +43,7 @@ const GoogleSearchSuggests = () => {
     <>
       <S.GoogleTitle>구글 검색</S.GoogleTitle>
 
-      <S.SearchContainer>
+      <S.SearchContainer onSubmit={handleSubmitGoogleInput}>
         <S.SearchBar>
           <FontAwesomeIcon
             icon={faSearch}

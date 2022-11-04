@@ -50,12 +50,10 @@ export const Content = styled.div`
   text-overflow: ellipsis;
   word-break: break-all;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
 `;
 
 export const ImgContent = styled.div`
-  display: flex;
-  flex: 0 0 10%;
   border-radius: 50px;
   overflow: hidden;
 `;

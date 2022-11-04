@@ -27,7 +27,7 @@ export const SuggestsWrapper = styled.div`
   z-index: 1000;
 `;
 
-export const SearchContainer = styled.div`
+export const SearchContainer = styled.form`
   ${({ theme }) => theme.flexBox("column", "", "space-between")}
   ${({ theme }) => theme.commonPadding("10px 20px")};
   ${({ theme }) => theme.border(`1px solid ${theme.PRIMARY_FONT}`)};
