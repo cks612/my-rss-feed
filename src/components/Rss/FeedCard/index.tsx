@@ -29,7 +29,8 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
                 src={feedData.thumbnailImage}
                 alt="feedImage"
                 width={100}
-                height={100}
+                height={50}
+                layout="fixed"
                 objectFit="fill"
               />
             </S.ImgContent>
@@ -39,7 +40,8 @@ const FeedCard = ({ feedData }: { feedData: Item }) => {
                 src={feedData.enclosure?.url}
                 alt="feedImage"
                 width={100}
-                height={100}
+                height={50}
+                layout="fixed"
                 objectFit="fill"
               />
             )) ??
