@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
       dehydratedState: dehydrate(queryClient),
     },
     // ISR 방식으로 3시간마다 업데이트
-    revalidate: 60 * 60 * 3,
+    // revalidate: 60 * 60 * 3,
   };
 };
 export default Rss;
