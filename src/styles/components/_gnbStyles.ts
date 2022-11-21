@@ -65,3 +65,23 @@ export const TimeTraker = styled.p`
   text-shadow: 0 0 5px #171717, 0 0 20px #171717, 0 0 40px #5da7db,
     0 0 55px #5da7db, 0 0 5px #5da7db;
 `;
+
+export const SnsLink = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  top: 0;
+  right: -30%;
+  padding: 20px 20px;
+  font-size: 1.2em;
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.PRIMARY_FONT};
+
+    &:nth-last-child(1) {
+      transform: translateY(1px);
+    }
+  }
+`;

@@ -1,12 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { styles } from "@styles/_theme";
 import { ThemeContext } from "pages/_app";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import * as S from "@styles/components/_gnbStyles";
 import dynamic from "next/dynamic";
+
+const faGoogleImg = faGoogle as IconProp;
+const faInstagramImg = faInstagram as IconProp;
 
 const TimeClicker = dynamic(() => import("@components/Clock"), {
   ssr: false,
@@ -73,6 +78,24 @@ const Gnb = () => {
           </Link>
         </S.Box>
       </S.GnbContent>
+      <S.SnsLink>
+        <a href="https://mail.google.com/" target="_blank" rel="noreferrer">
+          <FontAwesomeIcon
+            icon={faGoogleImg}
+            color={colorTheme === styles.lightTheme ? "black" : "white"}
+          />
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
+          <FontAwesomeIcon
+            icon={faInstagramImg}
+            color={colorTheme === styles.lightTheme ? "black" : "white"}
+          />
+        </a>
+
+        <a href="https://www.naver.com" target="_blank" rel="noreferrer">
+          NAVER
+        </a>
+      </S.SnsLink>
     </S.GnbWrapper>
   );
 };

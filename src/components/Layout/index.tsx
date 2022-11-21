@@ -1,6 +1,5 @@
 import Footer from "@components/Footer";
 import Gnb from "@components/Gnb";
-import dynamic from "next/dynamic";
 import React from "react";
 import styled from "styled-components";
 

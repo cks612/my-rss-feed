@@ -49,7 +49,7 @@ const getThumbnailImage = (data: Item) => {
       const url = new URL(data.link ?? "");
       imageUrl = url.origin + imageUrl;
     } catch (error) {
-      console.log(error);
+      console.debug(error);
     }
   }
   return imageUrl;
