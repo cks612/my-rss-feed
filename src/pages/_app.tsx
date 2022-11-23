@@ -7,13 +7,13 @@ import {
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { createContext } from "react";
-import Layout from "@components/Layout";
 import { useDarkMode } from "hooks/utils/useDarkMode";
 import { MainTheme, mixins, styles } from "@styles/_theme";
 import GlobalStyles from "@styles/_GlobalStyles";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Head from "next/head";
+import Layout from "@components/Layout";
 
 config.autoAddCss = false;
 
