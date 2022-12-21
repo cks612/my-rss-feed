@@ -15,7 +15,7 @@ const Feed = ({ feeds }: { feeds: FeedDataType[] }) => {
   return (
     <>
       <S.BlogTitle>
-        My Subscribe Blogs{" "}
+        My Subscribe Blogs
         <FontAwesomeIcon
           icon={faSquareRss}
           width={20}

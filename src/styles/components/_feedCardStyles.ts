@@ -25,7 +25,9 @@ export const Title = styled.h1`
   color: ${({ theme }) => theme.FEED_TITLE};
   font-weight: 900;
 `;
-export const PubDate = styled(Title)``;
+export const PubDate = styled(Title)`
+  font-size: 0.8em;
+`;
 
 export const Container = styled.div`
   display: flex;
