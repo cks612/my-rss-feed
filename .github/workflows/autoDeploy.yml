@@ -8,12 +8,12 @@ on:
     - cron: "0 */3 * * *"
 jobs:
   cron:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
 
       - name: Install Vercel CLI (Vercel CLI 설치)
-        run: yarn add vercel@latest
+        run: yarn global add vercel@latest
 
       - name: Pull Vercel Environment Information (Vercel 원격 환경에서 환경 변수 및 프로젝트 설정을 가져오기)
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
